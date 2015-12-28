@@ -1,23 +1,22 @@
-package com.samao.bootspring;
+package com.samao.bootspring.controller;
 
-import java.math.BigInteger;
 
 /**
  * Created by samao on 12/26/15.
  */
 public class Greeting {
 
-    private BigInteger id;
+    private Long id;
     private String text;
 
     public Greeting() {
     }
 
-    public BigInteger getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
