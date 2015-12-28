@@ -4,17 +4,19 @@ import com.samao.bootspring.model.Greeting;
 import com.samao.bootspring.repository.GreetingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by samao on 12/27/15.
  */
 
 @Service
+@Transactional(
+        propagation = Propagation.SUPPORTS,
+        readOnly = true)
 public class GreetingServiceBean implements GreetingService {
 
     @Autowired
@@ -33,19 +35,28 @@ public class GreetingServiceBean implements GreetingService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,
+            readOnly = false)
     public Greeting create(Greeting greeting) {
-        if (greeting.getId() != null){
+        if (greeting.getId() != null) {
             // Cannot create Greeting with specified ID value
             return null;
         }
         Greeting savedGreeting = greetingRepository.save(greeting);
+
+        // Illustrate TX rollback
+        if (savedGreeting.getId() == 4L){
+            throw new RuntimeException("Roll me back!");
+        }
         return savedGreeting;
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,
+            readOnly = false)
     public Greeting update(Greeting greeting) {
         Greeting greetingPersisted = findOne(greeting.getId());
-        if (greetingPersisted == null){
+        if (greetingPersisted == null) {
             // Cannot update Greeting that hasn't been persisted
             return null;
         }
@@ -54,6 +65,8 @@ public class GreetingServiceBean implements GreetingService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,
+            readOnly = false)
     public void delete(Long id) {
 
         greetingRepository.delete(id);
