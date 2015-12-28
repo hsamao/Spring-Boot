@@ -1,6 +1,6 @@
 package com.samao.bootspring.service;
 
-import com.samao.bootspring.controller.Greeting;
+import com.samao.bootspring.model.Greeting;
 
 import java.util.Collection;
 

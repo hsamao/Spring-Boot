@@ -1,5 +1,6 @@
 package com.samao.bootspring.controller;
 
+import com.samao.bootspring.model.Greeting;
 import com.samao.bootspring.service.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

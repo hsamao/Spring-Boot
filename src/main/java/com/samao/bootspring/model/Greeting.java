@@ -1,11 +1,19 @@
-package com.samao.bootspring.controller;
+package com.samao.bootspring.model;
 
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Created by samao on 12/26/15.
  */
+
+@Entity
 public class Greeting {
 
+    @Id
+    @GeneratedValue
     private Long id;
     private String text;
 
