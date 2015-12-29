@@ -1,4 +1,4 @@
 mvn clean install
-mvn package
+mvn clean package
 java -jar target/spring-boot-ws-1.0.jar --debug
 
